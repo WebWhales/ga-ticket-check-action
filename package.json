@@ -1,7 +1,7 @@
 {
   "name": "ga-ticket-check-action",
   "description": "Verify that your pull request titles start with a ticket ID",
-  "version": "1.0",
+  "version": "v1.0",
   "author": "Web Whales",
   "license": "MIT",
   "repository": {
