@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 // @ts-ignore
-import { debug as log, getInput, setFailed } from '@actions/core';
+import {debug as log, getInput, setFailed} from '@actions/core';
 // @ts-ignore
-import { context, getOctokit } from '@actions/github';
+import {context, getOctokit} from '@actions/github';
 
 // Helper function to retrieve ticket number from a string (either a shorthand reference or a full URL)
 const extractId = (value: string): string | null => {
@@ -54,22 +54,22 @@ async function run(): Promise<void> {
 
     // Check for a ticket reference in the title
     const title: string = context?.payload?.pull_request?.title;
-    const ticketLink = getInput('ticketLink', { required: false });
+    const ticketLink = getInput('ticketLink', {required: false});
 
     // Get the title format
-    const titleFormat = getInput('titleFormat', { required: true });
+    const titleFormat = getInput('titleFormat', {required: true});
 
     // Instantiate a GitHub Client instance
-    const token = getInput('token', { required: true });
+    const token = getInput('token', {required: true});
     const client = getOctokit(token);
-    const { owner, repo, number } = context.issue;
+    const {owner, repo, number} = context.issue;
     const login = context.payload.pull_request?.user.login as string;
     const senderType = context.payload.pull_request?.user.type as string;
     const sender: string = senderType === 'Bot' ? login.replace('[bot]', '') : login;
-    const quiet = getInput('quiet', { required: false }) === 'true';
+    const quiet = getInput('quiet', {required: false}) === 'true';
 
     // Exempt Users
-    const exemptUsers = getInput('exemptUsers', { required: false })
+    const exemptUsers = getInput('exemptUsers', {required: false})
       .split(',')
       .map((user: string) => user.trim());
 
@@ -104,7 +104,7 @@ async function run(): Promise<void> {
 
       for (const ticketNumber of ticketNumbers) {
         const linkToTicket = ticketLink.replace('%ticketNumber%', ticketNumber)
-                                       .replace('%ticketPrefix%', ticketPrefix);
+          .replace('%ticketPrefix%', ticketPrefix);
 
         const currentReviews = await client.pulls.listReviews({
           owner,
@@ -134,7 +134,7 @@ async function run(): Promise<void> {
     };
 
     // Check for a ticket reference in the branch
-    const titleRegexBase = getInput('titleRegex', { required: true });
+    const titleRegexBase = getInput('titleRegex', {required: true});
     const titleRegexFlags = getInput('titleRegexFlags', {
       required: true
     });
@@ -157,7 +157,7 @@ async function run(): Promise<void> {
 
     // Check for a ticket reference in the branch
     const branch: string = context.payload.pull_request?.head.ref;
-    const branchRegexBase = getInput('branchRegex', { required: true });
+    const branchRegexBase = getInput('branchRegex', {required: true});
     const branchRegexFlags = getInput('branchRegexFlags', {
       required: true
     });
