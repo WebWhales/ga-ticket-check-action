@@ -1,8 +1,8 @@
 {
-  "name": "ticket-check-action",
+  "name": "ga-ticket-check-action",
   "description": "Verify that your pull request titles start with a ticket ID",
   "version": "1.4.1",
-  "author": "Neo Financial Engineering <engineering@neofinancial.com>",
+  "author": "Web Whales",
   "license": "MIT",
   "repository": {
     "type": "git",

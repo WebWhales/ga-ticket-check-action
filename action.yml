@@ -3,19 +3,14 @@ description: 'Verify that pull request titles start with a ticket ID'
 author: 'Neo Financial Engineering'
 
 inputs:
-  ticketPrefix:
-    description: 'The unique identifier for the ticket/issue'
-    default: ''
-    required: false
-
   titleFormat:
-    description: "The intended format the title should be set to if it doesn't match the regular expression. Available variables are `%prefix%`, `%id%`, and `%title%`"
-    default: '%prefix%%id%: %title%'
+    description: "The intended format the title should be set to if it doesn't match the regular expression. Available variables are `%ticketPrefix%`, `%ticketNumber%`, and `%title%`"
+    default: '[%ticketPrefix% %ticketNumber%]: %title%'
     required: true
 
   titleRegex:
     description: 'The regular expression used to search the title for the intended format'
-    default: '^(CH)(-?)(?<ticketNumber>\d{3,})'
+    default: '^\[(?<ticketPrefix>bugfix|feat|hotfix|release|wip) (?<ticketNumber>(\d{3,},?\s*)+)\]'
     required: true
 
   titleRegexFlags:
@@ -25,7 +20,7 @@ inputs:
 
   branchRegex:
     description: 'The regular expression used to search the branch for the intended format'
-    default: '^(CH)(-?)(?<ticketNumber>\d{3,})'
+    default: '^(?<ticketPrefix>bugfix|feat|hotfix|release|wip)\/(?<ticketNumber>(-?\d{3,})+)'
     required: true
 
   branchRegexFlags:
@@ -33,28 +28,10 @@ inputs:
     default: 'gi'
     required: true
 
-  bodyRegex:
-    description: 'The regular expression used to search the body for a shorthand reference'
-    default: '(CH)(-?)(?<ticketNumber>\d{3,})'
-    required: true
-
-  bodyRegexFlags:
-    description: 'The flags applied to the body regular expression when searching for a shorthand reference'
-    default: 'gim'
-    required: true
-
-  bodyURLRegex:
-    description: 'The regular expression used to search the body for a URL reference'
-    required: false
-
-  bodyURLRegexFlags:
-    description: 'The flags applied to the body regular expression when searching for a URL reference'
-    default: 'gim'
-    required: true
-
   exemptUsers:
-    description: 'User(s) who will be exempt from the ticket check rules. Particularly useful for automated/bot PRs'
-    default: ''
+    description: 'User(s) who will be exempt from the ticket check rules. Particularly useful for automated/bot PRs. 
+    Comma separated.'
+    default: 'dependabot'
     required: false
 
   quiet:
@@ -67,7 +44,7 @@ inputs:
     required: true
 
   ticketLink:
-    description: 'Ticket URL with `%ticketNumber%` placeholder'
+    description: 'Ticket URL with `%ticketNumber%` and `%ticketPrefix%` placeholders'
     required: false
 
 runs:

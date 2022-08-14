@@ -29,6 +29,6 @@ jobs:
           add: build
           force: true
           message: Add build code
-          ref: v0.1
+          ref: v1.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
