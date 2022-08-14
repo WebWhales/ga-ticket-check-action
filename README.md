@@ -1,6 +1,6 @@
 # Pull Request Ticket Check Action
 
-[![Build status](https://github.com/neofinancial/ticket-check-action/workflows/CI/badge.svg)](https://github.com/neofinancial/ticket-check-action/actions)
+[![Build status](https://github.com/webwhales/ga-ticket-check-action/workflows/CI/badge.svg)](https://github.com/webwhales/ga-ticket-check-action/actions)
 
 Verify that pull request titles start with a ticket ID
 
